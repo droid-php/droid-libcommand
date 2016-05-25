@@ -1,0 +1,11 @@
+{
+    "name": "droid/libcommand",
+    "description": "A package of routines common to droid plugins.",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Droid\\Lib\\Plugin\\": "src/"
+        }
+    },
+    "require": {}
+}
