@@ -82,9 +82,7 @@ trait CheckableTrait
     private function reportChange(OutputInterface $output)
     {
         $this->end = microtime(true);
-        if (! $this->checkMode()) {
-            return;
-        }
+
         $output->writeLn(
             sprintf('[DROID-RESULT] %s', json_encode(array(
                 'changed' => $this->change,
