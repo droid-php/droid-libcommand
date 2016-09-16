@@ -9,9 +9,24 @@ class NameValueLine extends AbstractLine
     const FIELD_NAME = 'name';
     const FIELD_VALUE = 'value';
 
+    protected $mappingFields = array(self::FIELD_NAME);
+
     public function getMappingValues()
     {
-        return array($this->getFieldValue(self::FIELD_NAME));
+        $f = function ($fieldName) {
+            return $this->getFieldValue($fieldName);
+        };
+
+        return array_map(
+            $f->bindTo($this),
+            $this->mappingFields
+        );
+    }
+
+    public function setMappingFields(array $fields)
+    {
+        $this->mappingFields = $fields;
+        return $this;
     }
 
     /**

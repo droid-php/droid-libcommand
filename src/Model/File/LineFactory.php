@@ -6,6 +6,7 @@ class LineFactory
 {
     private $lineClassName;
     private $fieldSeparator;
+    private $mappingFields;
 
     public function __construct(
         $lineClassName,
@@ -25,10 +26,23 @@ class LineFactory
         $this->fieldSeparator = $fieldSeparator;
     }
 
+    public function getMappingFields()
+    {
+        return $this->mappingFields;
+    }
+
+    public function setMappingFields($mappingFields)
+    {
+        $this->mappingFields = $mappingFields;
+    }
+
     public function makeLine()
     {
         $line = new $this->lineClassName;
         $line->setFieldSeparator($this->fieldSeparator);
+        if ($this->mappingFields) {
+            $line->setMappingFields($this->mappingFields);
+        }
         return $line;
     }
 }

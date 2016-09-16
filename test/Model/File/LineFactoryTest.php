@@ -15,7 +15,8 @@ class LineFactoryTest extends PHPUnit_Framework_TestCase
      */
     public function testMakeLineWillReturnInstanceofTheSuppliedLineClass()
     {
-        $fac = new LineFactory(NameValueLine::class);
+        $fac = new LineFactory(NameValueLine::class, '=');
+        $fac->setMappingFields(array('foo'));
         $this->assertInstanceof(
             NameValueLine::class,
             $fac->makeLine(),
@@ -34,5 +35,17 @@ class LineFactoryTest extends PHPUnit_Framework_TestCase
         $this->assertSame('some-sep', $fac->getFieldSeparator());
         $fac->setFieldSeparator('other-sep');
         $this->assertSame('other-sep', $fac->getFieldSeparator());
+    }
+
+    /**
+     * @covers \Droid\Lib\Plugin\Model\File\LineFactory::getMappingFields
+     * @covers \Droid\Lib\Plugin\Model\File\LineFactory::setMappingFields
+     */
+    public function testMappingFieldsAccessAndMutation()
+    {
+        $fac = new LineFactory(NameValueLine::class, 'some-sep');
+        $this->assertNull($fac->getMappingFields());
+        $fac->setMappingFields(array('foo'));
+        $this->assertSame(array('foo'), $fac->getMappingFields());
     }
 }

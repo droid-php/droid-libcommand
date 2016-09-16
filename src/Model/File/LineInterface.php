@@ -82,6 +82,14 @@ interface LineInterface
     public function getMappingValues();
 
     /**
+     * Set a list of field names of which the values will be used in a mapping
+     * of values to line.
+     *
+     * @return \Droid\Lib\Plugin\Model\File\LineInterface
+     */
+    public function setMappingFields(array $fields);
+
+    /**
      * Return the string content of the line.
      *
      * @return string

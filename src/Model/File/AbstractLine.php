@@ -83,6 +83,8 @@ abstract class AbstractLine implements LineInterface
 
     abstract public function getMappingValues();
 
+    abstract public function setMappingFields(array $fields);
+
     public function __toString()
     {
         if ($this->originalValues && $this->givenValues) {

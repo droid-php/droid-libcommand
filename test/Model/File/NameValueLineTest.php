@@ -11,7 +11,7 @@ class NameValueLineTest extends PHPUnit_Framework_TestCase
     /**
      * @covers \Droid\Lib\Plugin\Model\File\NameValueLine::getMappingValues
      */
-    public function testGetMappingValuesWillReturnTheNameOfTheOption()
+    public function testGetMappingValuesWillReturnTheValueOfTheMappingField()
     {
         $line = new NameValueLine;
 
@@ -22,6 +22,31 @@ class NameValueLineTest extends PHPUnit_Framework_TestCase
 
         $this->assertSame(
             array('some-option-name'),
+            $line->getMappingValues()
+        );
+    }
+
+    /**
+     * @covers \Droid\Lib\Plugin\Model\File\NameValueLine::setMappingFields
+     */
+    public function testSetMappingFieldWillAlterTheFieldUsedForMapping()
+    {
+        $line = new NameValueLine;
+
+        $line
+            ->setFieldValue(NameValueLine::FIELD_NAME, 'some-option-name')
+            ->setFieldValue(NameValueLine::FIELD_VALUE, 'some-option-value')
+        ;
+
+        $line->setMappingFields(array(NameValueLine::FIELD_NAME));
+        $this->assertSame(
+            array('some-option-name'),
+            $line->getMappingValues()
+        );
+
+        $line->setMappingFields(array(NameValueLine::FIELD_VALUE));
+        $this->assertSame(
+            array('some-option-value'),
             $line->getMappingValues()
         );
     }
